@@ -287,21 +287,26 @@ if __name__ == '__main__':
         
         # Assume conn is your established database connection
         # You would call refactor_query like this:
-        refactor_query(conn_child2, original_query, optimized_query)
+        #refactor_query(conn_child2, original_query, optimized_query)
         # Connection parameters list
-        #conn_params_list = [conn_child1,conn_child2]
+        conn_params_list = [conn_child2]
         # Create indexes on each child database        
         #create_index(conn_child1, 'userprofile', 'location')
         #create_index(conn_child2, 'userprofile', 'location')
         
         # Simulate a distributed query that fetches user profiles based on location        
-        #query = "SELECT * FROM userprofile WHERE location = %s;"
-        #query_params = ("ndislvc niducdskjfnsadxknccsakjnddxisjsx",)
+        query = "SELECT * FROM userprofile WHERE location = %s;"
+        query_params = ("ndislvc niducdssakjdnasolnkfkdsl vckisndfisdnflkdasnkjfnsadxknccsakjnddxisjsx",)
 
         # Measure query performance on all databases before creating the index
         #print("Measuring query performance without indexes...")
-        #total_time_without_index = execute_query_on_all_dbs(conn_params_list, query, query_params)
-        #sprint(f'total_time_without_index is {total_time_without_index}')
+        total_time_without_index = execute_query_on_all_dbs(conn_params_list, query, query_params)
+        print(f'total_time_without_index is {total_time_without_index}')
+
+        create_index(conn_child2, 'userprofile', 'location')
+
+        total_time_without_index = execute_query_on_all_dbs(conn_params_list, query, query_params)
+        print(f'total_time_with_index is {total_time_without_index}')
 
         
     
